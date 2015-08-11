@@ -7,8 +7,7 @@ Author: Ricardo Vladimiro
 Maintainer: Ricardo Vladimiro <r.vladimiro@gmail.com>
 Description: The functions in this package create ggplot2 plots. Everything is
     predefined, just plugin data and it will generate a pretty plot.
-Imports: 
-    ggplot2
+Depends: ggplot2
 License: MIT
 LazyData: TRUE
 Suggests: testthat
