@@ -1,0 +1,10 @@
+Package: ognd.plot
+Type: Package
+Title: Quick one liner functions for pre-formatted ggplot2 plots
+Version: 0.1
+Date: 2015-08-11
+Author: Ricardo Vladimiro
+Maintainer: Ricardo Vladimiro <r.vladimiro@gmail.com>
+Description: The functions in this package create ggplot2 plots. Everything is predefined, just plugin data and it will generate a pretty plot.
+License: MIT
+LazyData: TRUE
