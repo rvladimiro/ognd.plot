@@ -55,21 +55,23 @@
 #' @param x The x axis variable
 #' @param y The y axis variable
 #' @param dataframe An optional dataframe. If dataframe is used, all variables
-#'    (x, y, color and size) must be of the dataframe.
+#'        (x, y, color and size) must be of the dataframe.
 #' @param color A vector of the same length of x and y. An arbitrary color
-#'    (e.g. "blue") cannot be used.
+#'        (e.g. "blue") cannot be used. If vector color is not provided, the
+#'        default color is blue.
+#' @param alpha The transparency of the data points.
 #' @param size A vector of the same length of x and y. An arbitrary size (e.g.
-#'    8) cannot be used.
+#'        8) cannot be used.
 #' @param title The title of the plot
 #' @param x_label The x axis label. If no label is given, the name of the x
-#'    variable is used.
+#'        variable is used.
 #' @param y_label The y axis label. If no label is given, the name of the y
-#'    variable is used.
+#'        variable is used.
 #' @param color_title The title of the color legend. If there is no color
-#'    vector, the color_title is ignored.
+#'        vector, the color_title is ignored.
 #' @param size_title The title of the size legend. If there is no size vector,
-#'    the size_title is ignored.
-#' @param  facet_formula The formula to create facet grids on ggplot.
+#'        the size_title is ignored.
+#' @param facet_formula The formula to create facet grids on ggplot.
 #' @export
 scatter_plot <- function(x,                   # x axis variable
                          y,                   # y axis variable

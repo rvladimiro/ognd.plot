@@ -23,7 +23,7 @@ format_plot <- function(plot,                # The plot to format
   }
 
   if (!is.null(color_title)) {
-    plot = plot + labs(color = color_title)
+    plot = plot + labs(color = color_title, fill = color_title)
   }
 
   if (!is.null(size_title)) {
