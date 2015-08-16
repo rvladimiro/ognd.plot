@@ -1,7 +1,13 @@
 
-format_plot <- function(plot, title = NULL, x_label = NULL, y_label = NULL, facet_formula = NULL) {
+format_plot <- function(plot,
+                        title = NULL,
+                        x_label = NULL,
+                        y_label = NULL,
+                        color_title = NULL,
+                        size_title = NULL,
+                        facet_formula = NULL) {
 
-  if(!is.null(title)) {
+  if (!is.null(title)) {
     plot = plot + ggtitle(paste0(title, '\n'))
   }
 
@@ -13,11 +19,26 @@ format_plot <- function(plot, title = NULL, x_label = NULL, y_label = NULL, face
     plot = plot + ylab(y_label)
   }
 
+  if (!is.null(color_title)) {
+    plot = plot + labs(color = color_title)
+  }
+
+  if (!is.null(size_title)) {
+    plot = plot + labs(size = size_title)
+  }
+
+
   if(!is.null(facet_formula)) {
-    plot = plot + facet_grid(facet_formula) + theme_bw(base_size = 10)
+    plot = plot +
+      facet_grid(facet_formula) +
+      theme_bw() +
+      theme(
+        legend.position = 'bottom',
+        plot.title =
+          element_text(family = 'Trebuchet MS', face = 'bold', size = 16))
   } else {
     plot = plot +
-      theme_bw(base_size = 10) +
+      theme_bw() +
       theme(
         axis.line = element_line(colour = "black"),
         legend.position = 'bottom',
