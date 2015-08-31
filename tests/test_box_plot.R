@@ -8,18 +8,18 @@ my_facet = as.factor(rep(c("One", "Another"), 500))
 my_dataframe = data.frame(x = my_dimension, y = my_measure, f = my_facet)
 
 # Test single vector
-ognd_boxplot(measure = my_measure,
-             dimension = my_dimension,
-             title = "Simple box plot")
+box_plot(measure = my_measure,
+         dimension = my_dimension,
+         title = "Simple box plot")
 
 # Wait for key stroke
 key_stroke = readline(prompt = 'Press Enter to continue...')
 
 # Test dataframe and labels
-ognd_boxplot(measure = y,
-             dimension = x,
-             dataframe = my_dataframe,
-             title = "Dataframe and labels",
-             measure_label = "Values",
-             dimension_label = "Dimensions",
-             facet_formula = ~f)
+box_plot(measure = y,
+         dimension = x,
+         dataframe = my_dataframe,
+         title = "Dataframe, labels and facets",
+         measure_label = "Values",
+         dimension_label = "Dimensions",
+         facet_formula = ~f)

@@ -2,14 +2,70 @@
 % Please edit documentation in R/box_plot.R
 \name{box_plot}
 \alias{box_plot}
-\alias{ognd_boxplot}
-\title{box_plot}
+\title{Creaate box plots}
 \usage{
-ognd_boxplot(measure, dimension, dataframe = NULL, alpha = 0.66,
-  notch = T, title = NULL, x_label = NULL, y_label = NULL,
+box_plot(measure, dimension, dataframe = NULL, alpha = 0.66, notch = T,
+  title = NULL, measure_label = NULL, dimension_label = NULL,
   facet_formula = NULL)
 }
+\arguments{
+\item{measure}{The measure of interest. The continuous variable from which
+the box plots are drawn.}
+
+\item{dimension}{The dimension separates the several box plots of the
+visualisation. It also defines the color of each box plot.}
+
+\item{dataframe}{An optional dataframe. If a dataframe is provided, all
+variables (measure and dimension) must be columns of the dataframe.}
+
+\item{alpha}{The transparency of the fill of the box plots. Alpha does not
+affect the lines of the box plots.}
+
+\item{notch}{If true (default) notchs are added to the boxplots.}
+
+\item{title}{The title of the plot}
+
+\item{measure_label}{The measure (y axis) label. If not used, the name of
+the variable passed to the measure parameter is used.}
+
+\item{dimension_label}{The dimension (x axis) label. If not used, the name
+of the variable passed to the dimension parameter is used.}
+
+\item{facet_formula}{The formula to create facet grids on ggplot.}
+}
 \description{
-box_plot
+Wrapper for ggplot() + geom_boxplot() visualisations
+}
+\details{
+This function allows the creation of box plots in one line. It
+         handles color automatically, according to the dimension given. The
+         box plot always needs a measure and a dimension.
+}
+\examples{
+# Set the seed
+set.seed(1714)
+
+# Create the variables
+my_measure = rnorm(1000) + rep(c(0, 1.1, 1.2, 1.4, 1.8), 200)
+my_dimension = as.factor(rep(c("A", "B", "C", "D", "E"), 200))
+my_facet = as.factor(rep(c("One", "Another"), 500))
+my_dataframe = data.frame(x = my_dimension, y = my_measure, f = my_facet)
+
+# Test single vector
+box_plot(measure = my_measure,
+         dimension = my_dimension,
+         title = "Simple box plot")
+
+# Wait for key stroke
+key_stroke = readline(prompt = 'Press Enter to continue...')
+
+# Test dataframe and labels
+box_plot(measure = y,
+         dimension = x,
+         dataframe = my_dataframe,
+         title = "Dataframe, labels and facets",
+         measure_label = "Values",
+         dimension_label = "Dimensions",
+         facet_formula = ~f)
 }
 

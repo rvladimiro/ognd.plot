@@ -17,10 +17,13 @@ scatter_plot(x, y, dataframe = NULL, color = NULL, size = NULL,
 (x, y, color and size) must be of the dataframe.}
 
 \item{color}{A vector of the same length of x and y. An arbitrary color
-(e.g. "blue") cannot be used.}
+(e.g. "blue") cannot be used. If vector color is not provided, the
+default color is blue.}
 
 \item{size}{A vector of the same length of x and y. An arbitrary size (e.g.
 8) cannot be used.}
+
+\item{alpha}{The transparency of the data points.}
 
 \item{title}{The title of the plot}
 

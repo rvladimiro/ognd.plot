@@ -86,22 +86,23 @@ scatter_plot <- function(x,                   # x axis variable
                          size_title = NULL,   # legend size title
                          facet_formula = NULL # facet formula to create facets
                          ) {
-
-
-
+  
+  
+  
   # Get variable names
   x_name = deparse(substitute(x))
   y_name = deparse(substitute(y))
   color_name = deparse(substitute(color))
   size_name = deparse(substitute(size))
-
+  
+  
+  
   # Get color and size values
   color_values = eval(substitute(color), dataframe, parent.frame())
   size_values = eval(substitute(size), dataframe, parent.frame())
-
-
-
-
+  
+  
+  
   # Determine the type of viz to produce.
   #   0: Simple, no color and no size
   #   1: Color used, no size
@@ -114,76 +115,78 @@ scatter_plot <- function(x,                   # x axis variable
   # Second check if size variable is null. If it isn't, viz_type is added 2.
   # If it is null, viz_type maintains its value.
   viz_type = viz_type + 2 * !is.null(size_values)
-
-
-
+  
+  
+  
   # Plot a scatter plot with no color and no size
   if (viz_type == 0) {
-
+    
     plot = ggplot(mapping = aes_string(x = x_name, y = y_name),
                   data = dataframe) +
            geom_point(color = 'blue', alpha = alpha)
-
+    
   }
-
-
-
+  
+  
+  
   # Create a scatter plot with color but no size
   if (viz_type == 1) {
-
+    
     plot = ggplot(mapping = aes_string(x = x_name,
                                        y = y_name,
                                        color = color_name),
                   data = dataframe) +
            geom_point(alpha = alpha)
-
+    
   }
-
-
-
+  
+  
+  
   # Create a scatter plot with size but no color
   if (viz_type == 2) {
-
+    
     plot = ggplot(mapping = aes_string(x = x_name,
                                        y = y_name,
                                        size = size_name),
                   data = dataframe) +
            geom_point(color = 'blue', alpha = alpha)
-
+    
   }
-
-
-
+  
+  
+  
   # Create a scatter plot with size and color
   if (viz_type == 3) {
-
+    
     plot = ggplot(mapping = aes_string(x = x_name,
                                        y = y_name,
                                        color = color_name,
                                        size = size_name),
                   data = dataframe) +
            geom_point(alpha = alpha)
-
+    
   }
-
-
-
+  
+  
+  
   # Take care of the color scales if the viz has color. The variable viz_type
   # is a odd number if color is present.
   if (viz_type %% 2 != 0) {
-
+    
     # The color of the points depend of the type of variable
     # If it is a numeric variable, it is a continuous scale
     if (is.numeric(color_values)) {
       plot = plot + scale_colour_gradient(low = 'green', high = 'red')
-
+      
     # If it is not a numeric variable it is treated as a discrete variable
     } else {
       plot = plot + scale_colour_brewer(palette = 'Set1')
     }
-
+    
   }
-
+  
+  
+  
   # Format the plot and return it
   return(format_plot(plot,
                      title,
@@ -192,5 +195,5 @@ scatter_plot <- function(x,                   # x axis variable
                      color_title,
                      size_title,
                      facet_formula))
-
+  
 }

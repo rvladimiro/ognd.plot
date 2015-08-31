@@ -15,21 +15,21 @@
 #' my_dataframe = data.frame(x = my_dimension, y = my_measure, f = my_facet)
 #'
 #' # Test single vector
-#' ognd_boxplot(measure = my_measure,
-#'              dimension = my_dimension,
-#'              title = "Simple box plot")
+#' box_plot(measure = my_measure,
+#'          dimension = my_dimension,
+#'          title = "Simple box plot")
 #'
 #' # Wait for key stroke
 #' key_stroke = readline(prompt = 'Press Enter to continue...')
 #'
 #' # Test dataframe and labels
-#' ognd_boxplot(measure = y,
-#'              dimension = x,
-#'              dataframe = my_dataframe,
-#'              title = "Dataframe and labels",
-#'              measure_label = "Values",
-#'              dimension_label = "Dimensions",
-#'              facet_formula = ~f)
+#' box_plot(measure = y,
+#'          dimension = x,
+#'          dataframe = my_dataframe,
+#'          title = "Dataframe, labels and facets",
+#'          measure_label = "Values",
+#'          dimension_label = "Dimensions",
+#'          facet_formula = ~f)
 #'
 #' @param measure The measure of interest. The continuous variable from which
 #'        the box plots are drawn.
@@ -47,21 +47,25 @@
 #'        of the variable passed to the dimension parameter is used.
 #' @param facet_formula The formula to create facet grids on ggplot.
 #' @export
-ognd_boxplot = function(measure,
-                        dimension,
-                        dataframe = NULL,
-                        alpha = 0.66,
-                        notch = T,
-                        title = NULL,
-                        measure_label = NULL,
-                        dimension_label = NULL,
-                        facet_formula = NULL) {
-
+box_plot = function(measure,
+                    dimension,
+                    dataframe = NULL,
+                    alpha = 0.66,
+                    notch = T,
+                    title = NULL,
+                    measure_label = NULL,
+                    dimension_label = NULL,
+                    facet_formula = NULL) {
+  
+  
+  
+  # Get the names of the variables for later use
   measure_name = deparse(substitute(measure))
   dimension_name = deparse(substitute(dimension))
-
-  #if (!is.null(x_label)) x_label = dimension_name
-
+  
+  
+  
+  # Create the plot
   plot = ggplot(mapping = aes_string(x = dimension_name,
                                      y = measure_name,
                                      color = dimension_name,
@@ -73,11 +77,15 @@ ognd_boxplot = function(measure,
                       notch = notch) +
          scale_colour_brewer(palette = 'Set1') +
          scale_fill_brewer(palette = 'Set1')
-
+  
+  
+  
+  # Return the formated plot
   return(format_plot(plot = plot,
                      title = title,
                      x_label = dimension_label,
                      y_label = measure_label,
                      color_title = dimension_label,
                      facet_formula = facet_formula))
+  
 }
