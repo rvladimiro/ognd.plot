@@ -1,2 +1,4 @@
+.gitignore
+utils
 ^.*\.Rproj$
 ^\.Rproj\.user$

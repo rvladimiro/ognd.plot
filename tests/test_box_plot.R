@@ -2,24 +2,28 @@
 set.seed(1714)
 
 # Create the variables
-my_measure = rnorm(1000) + rep(c(0, 1.1, 1.2, 1.4, 1.8), 200)
-my_dimension = as.factor(rep(c("A", "B", "C", "D", "E"), 200))
-my_facet = as.factor(rep(c("One", "Another"), 500))
-my_dataframe = data.frame(x = my_dimension, y = my_measure, f = my_facet)
+arpu = rnorm(1000) + rep(c(0, 1.1, 1.2, 1.4, 1.8), 200)
+# Clean up since I don't want negative ARPU values
+arpu = arpu + abs(min(arpu)) + 0.5
+# Create country, stores and dataframe
+country = as.factor(rep(c("GER", "AUS", "CAN", "UK", "USA"), 200))
+store = as.factor(rep(c("Apple", "Google"), 500))
+dataframe = data.frame(COUNTRY = country, ARPU = arpu, STORE = store)
+
 
 # Test single vector
-box_plot(measure = my_measure,
-         dimension = my_dimension,
-         title = "Simple box plot")
+box_plot(measure = arpu,
+         dimension = country,
+         title = "ARPU per Country")
 
 # Wait for key stroke
 key_stroke = readline(prompt = 'Press Enter to continue...')
 
 # Test dataframe and labels
-box_plot(measure = y,
-         dimension = x,
-         dataframe = my_dataframe,
-         title = "Dataframe, labels and facets",
-         measure_label = "Values",
-         dimension_label = "Dimensions",
-         facet_formula = ~f)
+box_plot(measure = ARPU,
+         dimension = COUNTRY,
+         dataframe = dataframe,
+         title = "ARPU per Country and Store",
+         measure_label = "Average Revenue per User ($)",
+         dimension_label = "Country",
+         facet_formula = ~STORE)
